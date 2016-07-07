@@ -60,17 +60,21 @@ public:
 		return B; 
 	}
 
-	void Cal_Efficiency() // КПД = P(U,B) / (I * U), где I = const
+	void Cal_Efficiency() // Efficiency = P(B, U) / (I * U), where I = const
 	{
 		Efficiency = P / (I * U);
 	}
 
-	float geyEfficiency()
+	float getEfficiency()
 	{
 		return Efficiency;
 	}
-
 };
+
+void func()
+{
+
+}
 
 int main()
 {

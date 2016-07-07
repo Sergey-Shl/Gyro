@@ -19,13 +19,13 @@ public:
 		Efficiency = 0;
 	}
 
-	Parameters(float i, float u, float p, float b, float e)
+	Parameters(float i, float u, float p, float b)
 	{
 		I = i;
 		U = u;
 		P = p;
 		B = b;
-		Efficiency = e;
+		Cal_Efficiency();
 	}
 
 	float getI() 

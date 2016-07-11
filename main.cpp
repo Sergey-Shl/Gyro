@@ -1,4 +1,8 @@
 #include <vector>
+#include <cmath>
+#include <iostream>
+
+using namespace std;
 
 class Parameters
 {
@@ -8,6 +12,12 @@ private:
 	float P;
 	float B;
 	float Efficiency;
+	float prev_P;
+
+	void setNewP(float x)
+	{
+
+	}
 
 public:
 	Parameters()
@@ -42,10 +52,12 @@ public:
 		return U; 
 	}
 
-	void setP(float x) 
-	{ 
-		P = x;
+	void setP(float p)
+	{
+		prev_P = P;
+		P = p;
 	}
+
 	float getP() 
 	{
 		return P; 
@@ -71,13 +83,56 @@ public:
 	}
 };
 
-void func()
+void Cal_U(Parameters& a, float p)
 {
-
+	//For Paraboloid: (x-4)^2+(y-4)^2=-2z+32   
+	//Max P = 32, Min P = 0
+	//Center (4,4)
+	a.setU(sqrt(-2 * p + 32) + 4);
+	a.setB(4);
 }
 
 int main()
 {
+	Parameters S;
+	float P;
+
+	S.setP(8);
+	S.setB(6.83);
+	S.setU(6.83);
+
+	setlocale(0, "RU");
+
+	cout << "Текущее значение мощности: " << S.getP() << endl << "Напряжение: " << S.getU() << endl << "Магнитное поле: " << S.getB() << endl << "-------------" << endl;
+
+	cout << "Введите мощнось в пределах от 0 до 16:" << endl;
+
+	do{
+		do {
+			cout << "P = ";
+			cin >> P;
+			if (P > 16 || P < 0)
+				cout << "Мощнось изменяется в пределах от 0 до 16!" << endl;
+		} while (P > 16 || P < 0);
+
+		Cal_U(S, P);
+
+		if (S.getP() > P)
+		{
+			cout << "Магнитное поле: " << S.getB() << endl << "Напряжение: " << S.getU() << endl << "-------------" << endl;
+		}
+		else if (S.getP() < P)
+		{
+			cout << "Напряжение: " << S.getU() << endl << "Магнитное поле: " << S.getB() << endl << "-------------" << endl;
+		}
+		else
+		{
+			cout << "Введите значение, отличное от текущего!" << endl;
+		}
+		S.setP(P);
+	} while (true);
+
+	system("Pause");
 
 	return 0;
 }

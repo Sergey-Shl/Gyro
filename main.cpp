@@ -85,10 +85,13 @@ public:
 
 void Cal_U(Parameters& a, float p)
 {
-	//For Paraboloid: (x-4)^2+(y-4)^2=-2z+32   
+	//For Paraboloid: (x-4)^2+(y-4)^2=-z+16   
 	//Max P = 32, Min P = 0
 	//Center (4,4)
-	a.setU(sqrt(-2 * p + 32) + 4);
+	if (p == 0)
+		a.setU(sqrt(-p + 16) - 4);
+	else
+		a.setU(-sqrt(-p + 16) + 4);
 	a.setB(4);
 }
 
